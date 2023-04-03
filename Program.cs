@@ -19,7 +19,6 @@ public  class Program
 
     public async Task MainAsync()
     {
-        // Do Stuff
         var _config = new DiscordSocketConfig { MessageCacheSize = 100 };
         _client = new DiscordSocketClient(_config);
         _client.Log += Log;
@@ -35,6 +34,7 @@ public  class Program
         _client.Ready += () =>
         {
             Console.WriteLine("Ready!");
+            OnReady();
             return Task.CompletedTask;
         };
 
@@ -42,9 +42,24 @@ public  class Program
         await Task.Delay(-1);
     }
 
-    public async Task Announce(string msg)
+    public async Task OnReady()
     {
-        await _client.GetGuild(Guild).GetTextChannel(TextChannel).SendMessageAsync(msg);
+        // WE ARE READY TO DO STUFF NOW
+
+        //foreach (var msg in GetMessages())
+        //{
+
+        //}
+    }
+
+    public async Task SendText(string message)
+    {
+        await _client.GetGuild(Guild).GetTextChannel(TextChannel).SendMessageAsync(message);
+    }
+
+    public async Task SendFile(string filePath)
+    {
+        await _client.GetGuild(Guild).GetTextChannel(TextChannel).SendFileAsync(filePath, null);
     }
 
     private Task Log(LogMessage msg)
