@@ -5,6 +5,10 @@ using System.Reflection;
 using Discord.Commands;
 using Discord.Utils;
 using System.ComponentModel;
+using System.Threading.Channels;
+using INIParser;
+using System.Xml.Serialization;
+using System.Threading.Tasks.Dataflow;
 
 namespace PostBot;
 
@@ -46,10 +50,40 @@ public  class Program
     {
         // WE ARE READY TO DO STUFF NOW
 
-        //foreach (var msg in GetMessages())
-        //{
+        await BulkDelete();
+        Console.WriteLine($"BulkDelete done");
+        await PostFromXML();
+        Console.WriteLine($"PostFromXML done");
+    }
 
-        //}
+    public async Task PostFromXML()
+    {
+        XmlSerializer serializer = new XmlSerializer(typeof(List<MessagesFromXML>), new XmlRootAttribute("Messages"));
+        List<MessagesFromXML> messages;
+
+        using (FileStream stream = new FileStream("C:\\Users\\sabre\\source\\repos\\sabre230\\PostBot\\announcement.xml", FileMode.Open))
+        {
+            messages = (List<MessagesFromXML>)serializer.Deserialize(stream);
+            Console.WriteLine($"Loaded {messages.Count} messages from file.");
+        }
+
+        Console.WriteLine($"messages: {messages}");
+
+        foreach (var message in messages)
+        {
+            Console.WriteLine($"Message Text: {message.Text}");
+            await SendText(message.Text);
+
+            Console.WriteLine($"Message File: {message.File}");
+            await SendText(message.File + " REAL IMAGES COMING SOON:tm:");
+        }
+    }
+
+    public async Task BulkDelete()
+    {
+        var textChannel = await _client.GetChannelAsync(TextChannel) as ITextChannel;
+        var messages = await textChannel.GetMessagesAsync(250).FlattenAsync();
+        await textChannel.DeleteMessagesAsync(messages);
     }
 
     public async Task SendText(string message)
@@ -67,4 +101,10 @@ public  class Program
         Console.WriteLine(msg.ToString());
         return Task.CompletedTask;
     }
+}
+
+public class MessagesFromXML
+{
+    public string File { get; set; }
+    public string Text { get; set; }
 }

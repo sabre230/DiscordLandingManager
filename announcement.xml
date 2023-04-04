@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Messages>
+  <Message Text="" File="DinoPlanetCommunityDiscord.jpeg"/>
+  <Message Text="Welcome to the server! This is a big landing page and is the first thing lots of people see. It should probably be included in the screening process as well." File=""/>
+  <Message Text="Here is a link to this server so that invites can be monitored: https://discord.gg/2V5YRSa73u" File=""/>
+  <Message Text="" File="Rules.jpeg"/>
+  <Message Text="**Rule 1: Be excellent**
+			Don't be a shit
+
+			**Rule 2: Not hate speech**
+			Description
+
+			**Rule 3: Dinner table talk**
+			Description
+
+			**Rule 4: Stay on Topic**
+			Description
+
+			**Rule 5: No NSFW**
+			Disappointing I know
+
+			**Rule 6: Privacy**
+			Description
+
+			**Rule 7: Privacy Part 2: The Sequel**
+			Description
+
+			**Rule 8: Moderator Discretion**
+			Good to have for fringe cases
+
+			**Breaking any of these rules could result in:**
+			• A soft warning (a ping by a moderator and potential deletion of messages).
+			• A temporary mute (At moderator discretion)
+			• A temporary ban
+			• A **permanent ban** depending on circumstances" File=""/>
+  <Message Text="" File="Channels.jpeg"/>
+  <Message Text="dp-general : Description
+			discoveries : Description
+			patches_and_fixes: Description
+			announcements : Description
+			screenshots : Description
+			game-assets : Description
+			dp-help : Description"
+    File=""/>
+  <Message Text="" File="Roles.jpeg"/>
+  <Message Text="@User : That's you!
+			@Admin : This admin
+			@Community Manager : This community manager
+			@Moderator : This moderator, ping for room service
+			@Contributor : Beefcake representatives
+			@Streamer : Cream of the crop
+			@🔰 Got That New Baby Smell : I'm new be nice! Unless I'm a jerk. In which case kick me I'm a jerk."
+    File=""/>
+  <Message Text="" File="Links.jpeg"/>
+  <Message Text=":k_heart:  Dino Planet Wiki: https://www.dinosaurpla.net/
+			:play_pause:  YouTube: https://www.some-youtube-link.com/
+			:test_tube:  GitHub: https://ww.some-github-page.com/"
+    File=""/>
+  <Message Text="" File="Elsewhere.jpeg"/>
+  <Message Text="Here's some other Discord servers I'm in, I guess:
+
+			r/Metroid Server: https://discord.gg/WQ69vYJ
+			Lunistice: https://discord.com/invite/YfXtjAR
+			Ship of Harkinian: https://discord.gg/shipofharkinian
+			Ghost Song: https://discord.gg/ghostsong
+			Forest of Illusion: https://discord.gg/YjBd3cEg2u
+			Dinosaur Planet Community: https://discord.gg/yPDYXzYFb4"
+    File=""/>
+</Messages>

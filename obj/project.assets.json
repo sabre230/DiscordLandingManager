@@ -119,6 +119,15 @@
           }
         }
       },
+      "INIParser/1.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/INIParser.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/INIParser.dll": {}
+        }
+      },
       "Microsoft.Extensions.DependencyInjection.Abstractions/5.0.0": {
         "type": "package",
         "compile": {
@@ -357,6 +366,18 @@
         "lib/netstandard2.1/Discord.Net.WebSocket.xml"
       ]
     },
+    "INIParser/1.0.1": {
+      "sha512": "gO/vSgpyNel4h6O3sBPS/bRPwd+aOBke4RLImqTtKI+hmSucRGevyN+HRwpAuN8X+gUy+mL48vExWe5dYiaj0A==",
+      "type": "package",
+      "path": "iniparser/1.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "iniparser.1.0.1.nupkg.sha512",
+        "iniparser.nuspec",
+        "lib/net6.0/INIParser.dll"
+      ]
+    },
     "Microsoft.Extensions.DependencyInjection.Abstractions/5.0.0": {
       "sha512": "ORj7Zh81gC69TyvmcUm9tSzytcy8AVousi+IVRAI8nLieQjOFryRusSFh7+aLk16FN9pQNqJAiMd7BTKINK0kA==",
       "type": "package",
@@ -557,27 +578,28 @@
     "net6.0": [
       "Discord.Net >= 3.10.0",
       "Discord.Net.Commands >= 3.10.0",
-      "Discord.Net.Core >= 3.10.0"
+      "Discord.Net.Core >= 3.10.0",
+      "INIParser >= 1.0.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\oi17507\\.nuget\\packages\\": {},
+    "C:\\Users\\sabre\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\oi17507\\source\\repos\\PostBot\\PostBot.csproj",
+      "projectUniqueName": "C:\\Users\\sabre\\source\\repos\\sabre230\\PostBot\\PostBot.csproj",
       "projectName": "PostBot",
-      "projectPath": "C:\\Users\\oi17507\\source\\repos\\PostBot\\PostBot.csproj",
-      "packagesPath": "C:\\Users\\oi17507\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\oi17507\\source\\repos\\PostBot\\obj\\",
+      "projectPath": "C:\\Users\\sabre\\source\\repos\\sabre230\\PostBot\\PostBot.csproj",
+      "packagesPath": "C:\\Users\\sabre\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sabre\\Source\\Repos\\sabre230\\PostBot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\oi17507\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sabre\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -615,6 +637,10 @@
           "Discord.Net.Core": {
             "target": "Package",
             "version": "[3.10.0, )"
+          },
+          "INIParser": {
+            "target": "Package",
+            "version": "[1.0.1, )"
           }
         },
         "imports": [
@@ -633,7 +659,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }
