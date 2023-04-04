@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "783Ue6cazbMnfH3EPijY8szamCJKnHGV00zokMDK6vOz1C9nxVaBi7uybbGmc9phj8iDxvzmcOr+Esxxb0yE1Q==",
+  "dgSpecHash": "6JRsVwUqZsFqLeOxNVlbaRoJiDhrMYyR/SJo2HrrwQ4M8xRtDcwjRhENL9QKXPZWNIb+DD/zACLdgk8IsNAxQg==",
   "success": true,
   "projectFilePath": "C:\\Users\\oi17507\\source\\repos\\PostBot\\PostBot.csproj",
   "expectedPackageFiles": [
@@ -11,7 +11,6 @@
     "C:\\Users\\oi17507\\.nuget\\packages\\discord.net.rest\\3.10.0\\discord.net.rest.3.10.0.nupkg.sha512",
     "C:\\Users\\oi17507\\.nuget\\packages\\discord.net.webhook\\3.10.0\\discord.net.webhook.3.10.0.nupkg.sha512",
     "C:\\Users\\oi17507\\.nuget\\packages\\discord.net.websocket\\3.10.0\\discord.net.websocket.3.10.0.nupkg.sha512",
-    "C:\\Users\\oi17507\\.nuget\\packages\\iniparser\\1.0.1\\iniparser.1.0.1.nupkg.sha512",
     "C:\\Users\\oi17507\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\oi17507\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
     "C:\\Users\\oi17507\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",

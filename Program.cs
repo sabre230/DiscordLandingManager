@@ -4,14 +4,9 @@ using Discord.WebSocket;
 using System.Reflection;
 using Discord.Commands;
 using Discord.Utils;
-using System.ComponentModel;
-using System.Threading.Channels;
-using INIParser;
-using System.Xml.Serialization;
-using System.Threading.Tasks.Dataflow;
+
 using System.Xml.Linq;
-using System.Reactive;
-using System;
+
 
 namespace PostBot;
 

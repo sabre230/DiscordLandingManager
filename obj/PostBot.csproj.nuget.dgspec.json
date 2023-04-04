@@ -55,10 +55,6 @@
             "Discord.Net.Core": {
               "target": "Package",
               "version": "[3.10.0, )"
-            },
-            "INIParser": {
-              "target": "Package",
-              "version": "[1.0.1, )"
             }
           },
           "imports": [

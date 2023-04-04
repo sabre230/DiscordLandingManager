@@ -12,6 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="announcement-template.xml" />
+    <None Remove="config-template.xml" />
     <None Remove="template.xml" />
   </ItemGroup>
 
@@ -23,6 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="announcement-template.xml" />
+    <Resource Include="config-template.xml" />
     <Resource Include="template.xml" />
     <Resource Include="CommandHandler.cs" />
   </ItemGroup>

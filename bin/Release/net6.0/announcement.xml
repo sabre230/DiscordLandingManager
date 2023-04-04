@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Messages>
+	<Message>
+		<Text></Text>
+		<File>files\Header.png</File>
+	</Message>
+	<Message>
+		<Text>Welcome to the server! This is a big landing page and is the first thing lots of people see. It should probably be included in the screening process as well.</Text>
+		<File></File>
+	</Message>
+	<Message>
+		<Text>Here is a link to this server so that invites can be monitored: https://discord.gg/2V5YRSa73u</Text>
+		<File></File>
+	</Message>
+	<Message>
+		<Text></Text>
+		<File>files\Rules.png</File>
+	</Message>
+	<Message>
+		<Text>
+**Rule 1: Be excellent**
+Don't be a shit
+
+**Rule 2: Not hate speech**
+Description
+
+**Rule 3: Dinner table talk**
+Description
+
+**Rule 4: Stay on Topic**
+Description
+
+**Rule 5: No NSFW**
+Disappointing I know
+
+**Rule 6: Privacy**
+Description
+
+**Rule 7: Privacy Part 2: The Sequel**
+Description
+
+**Rule 8: Moderator Discretion**
+Good to have for fringe cases
+
+**Breaking any of these rules could result in:**
+• A soft warning (a ping by a moderator and potential deletion of messages).
+• A temporary mute (At moderator discretion)
+• A temporary ban
+• A **permanent ban** depending on circumstances
+		</Text>
+		<File></File>
+	</Message>
+	<Message>
+		<Text></Text>
+		<File>files\Channels.png</File>
+	</Message>
+	<Message>
+		<Text>
+&lt;#1080624027669909584> : Description
+&lt;#1080622314070233200> : Description
+&lt;#1080892532134772938> : Description
+&lt;#1080610797891358770> : Description
+&lt;#1080890064646713384> : Description
+&lt;#1080924188749070466> : Description
+&lt;#1080924838555820072> : Description
+		</Text>
+		<File></File>
+	</Message>
+	<Message>
+		<Text></Text>
+		<File>files\Roles.png</File>
+	</Message>
+	<Message>
+		<Text>
+&lt;@&amp;1080606356031164436> : That's you!
+&lt;@&amp;1080606640258154637> : This admin
+&lt;@&amp;1080606568447496273> : This community manager
+&lt;@&amp;1080606209205350530> : This moderator, ping for room service
+&lt;@&amp;1080929878813200404> : Beefcake representatives
+&lt;@&amp;1080931419821457539> : Cream of the crop
+&lt;@&amp;1085647374652813435> : I'm new be nice! Unless I'm a jerk. In which case kick me I'm a jerk.
+		</Text>
+		<File></File>
+	</Message>
+	<Message>
+		<Text></Text>
+		<File>files\Links.png</File>
+	</Message>
+	<Message>
+		<Text>
+:sauropod:  Dino Planet Wiki: https://www.dinosaurpla.net/
+:play_pause:  YouTube: https://www.some-youtube-link.com/
+:test_tube:  GitHub: https://ww.some-github-page.com/
+		</Text>
+		<File></File>
+	</Message>
+	<Message>
+		<Text></Text>
+		<File>files\Elsewhere.png</File>
+	</Message>
+	<Message>
+		<Text>Buncha discord servers</Text>
+		<File></File>
+	</Message>
+</Messages>
