@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Messages>
+		 <!--
+		For each message you want to send as part of an
+		announcement, make a new <Message/> block and make sure 
+		it has a block for <Text/> and <File/> inside
+		-->
+	<Message>
+		<Text>
+			<!-- Place the text you want to send here -->
+		</Text>
+
+		<File>
+			<!-- Place the file you want uploaded here -->
+		</File>
+	</Message>
+	
+</Messages>

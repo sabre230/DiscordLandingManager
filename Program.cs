@@ -9,20 +9,28 @@ using System.Threading.Channels;
 using INIParser;
 using System.Xml.Serialization;
 using System.Threading.Tasks.Dataflow;
+using System.Xml.Linq;
+using System.Reactive;
+using System;
 
 namespace PostBot;
 
 public  class Program
 {
     private DiscordSocketClient _client;
-    public ulong Guild = 1080603347427545199;
-    public ulong TextChannel = 1080606943204356177;
-    private string token = "MTA5MTM4NjM3MjczNDA3MDgyNA.GapIK9.Usa3nzYiN9CmL6uakzDO6C6gp0MTiuSY_RdEoE";
+
+    public ulong Guild;
+    public ulong TextChannel;
+    private string token;
 
     public static Task Main(string[] args) => new Program().MainAsync();
 
     public async Task MainAsync()
+
     {
+        // Get our settings before doing anything else!
+        await GetConfigFromXML();
+
         var _config = new DiscordSocketConfig { MessageCacheSize = 100 };
         _client = new DiscordSocketClient(_config);
         _client.Log += Log;
@@ -43,7 +51,8 @@ public  class Program
         };
 
         // Block this task until the program is closed
-        await Task.Delay(-1);
+        // Uncomment to keep the task open after finishing
+        //await Task.Delay(-1);
     }
 
     public async Task OnReady()
@@ -51,31 +60,73 @@ public  class Program
         // WE ARE READY TO DO STUFF NOW
 
         await BulkDelete();
-        Console.WriteLine($"BulkDelete done");
         await PostFromXML();
-        Console.WriteLine($"PostFromXML done");
+    }
+
+    public async Task GetConfigFromXML()
+    {
+        if (!File.Exists(Path.Combine("config.xml")))
+        {
+            Console.WriteLine($"File not found at: {Path.Combine("config.xml")}");
+            return;
+        }
+
+        XDocument xmlConfigFile = XDocument.Load("config.xml");
+
+        try
+        {
+            // Get the values of BotToken, GuildID, and TextChannelID
+            token = xmlConfigFile.Element("Settings").Element("BotToken").Value;
+            Guild = ulong.Parse(xmlConfigFile.Element("Settings").Element("GuildID").Value);
+            TextChannel = ulong.Parse(xmlConfigFile.Element("Settings").Element("TextChannelID").Value);
+
+            // Use the values as needed
+            if (token!= null || token != "")
+            {
+                Console.WriteLine($"Bot Token: -->{token}<--");
+            }
+            Console.WriteLine($"Guild ID: {Guild}");
+            Console.WriteLine($"Text Channel ID: {TextChannel}");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
     }
 
     public async Task PostFromXML()
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(List<MessagesFromXML>), new XmlRootAttribute("Messages"));
-        List<MessagesFromXML> messages;
-
-        using (FileStream stream = new FileStream("C:\\Users\\sabre\\source\\repos\\sabre230\\PostBot\\announcement.xml", FileMode.Open))
+        if (!File.Exists(Path.Combine("announcement.xml")))
         {
-            messages = (List<MessagesFromXML>)serializer.Deserialize(stream);
-            Console.WriteLine($"Loaded {messages.Count} messages from file.");
+            Console.WriteLine($"announcement.xml not found.");
+            return;
         }
 
-        Console.WriteLine($"messages: {messages}");
+        XDocument xmlAnnouncementFile = XDocument.Load("announcement.xml");
+        List<MessagesFromXML> messages = xmlAnnouncementFile.Root.Elements("Message").Select(x => new MessagesFromXML { Text = x.Element("Text").Value, File = x.Element("File").Value }).ToList();
 
-        foreach (var message in messages)
+        try
         {
-            Console.WriteLine($"Message Text: {message.Text}");
-            await SendText(message.Text);
+            Console.WriteLine($"Loaded {messages.Count} messages from file.");
 
-            Console.WriteLine($"Message File: {message.File}");
-            await SendText(message.File + " REAL IMAGES COMING SOON:tm:");
+            foreach (var message in messages)
+            {
+                if (message.Text != "")
+                {
+                    Console.WriteLine($"Message Text: {message.Text}");
+                    await SendText(message.Text);
+                }
+                
+                if (message.File != "" && File.Exists(message.File))
+                {
+                    Console.WriteLine($"Message File: {message.File}");
+                    await SendFile(message.File);
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e);
         }
     }
 
@@ -88,12 +139,18 @@ public  class Program
 
     public async Task SendText(string message)
     {
-        await _client.GetGuild(Guild).GetTextChannel(TextChannel).SendMessageAsync(message);
+        if (message != "")
+        {
+            await _client.GetGuild(Guild).GetTextChannel(TextChannel).SendMessageAsync(message);
+        }
     }
 
     public async Task SendFile(string filePath)
     {
-        await _client.GetGuild(Guild).GetTextChannel(TextChannel).SendFileAsync(filePath, null);
+        if (filePath != "")
+        {
+            await _client.GetGuild(Guild).GetTextChannel(TextChannel).SendFileAsync(filePath, null);
+        }        
     }
 
     private Task Log(LogMessage msg)
@@ -107,4 +164,11 @@ public class MessagesFromXML
 {
     public string File { get; set; }
     public string Text { get; set; }
+}
+
+public class ConfigFromXML
+{ 
+    public string BotToken { get; set; }
+    public string GuildID { get; set; }
+    public string TextChannelID { get; set; }
 }

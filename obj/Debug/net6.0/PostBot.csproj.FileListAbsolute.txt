@@ -53,3 +53,4 @@ C:\Users\sabre\Source\Repos\sabre230\PostBot\obj\Debug\net6.0\refint\PostBot.dll
 C:\Users\sabre\Source\Repos\sabre230\PostBot\obj\Debug\net6.0\PostBot.pdb
 C:\Users\sabre\source\repos\sabre230\PostBot\obj\Debug\net6.0\PostBot.genruntimeconfig.cache
 C:\Users\sabre\source\repos\sabre230\PostBot\obj\Debug\net6.0\ref\PostBot.dll
+C:\Users\oi17507\source\repos\PostBot\bin\Debug\net6.0\INIParser.dll
