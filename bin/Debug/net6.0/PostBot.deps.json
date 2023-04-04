@@ -10,8 +10,7 @@
         "dependencies": {
           "Discord.Net": "3.10.0",
           "Discord.Net.Commands": "3.10.0",
-          "Discord.Net.Core": "3.10.0",
-          "INIParser": "1.0.1"
+          "Discord.Net.Core": "3.10.0"
         },
         "runtime": {
           "PostBot.dll": {}
@@ -100,14 +99,6 @@
           "lib/net6.0/Discord.Net.WebSocket.dll": {
             "assemblyVersion": "3.10.0.0",
             "fileVersion": "3.10.0.0"
-          }
-        }
-      },
-      "INIParser/1.0.1": {
-        "runtime": {
-          "lib/net6.0/INIParser.dll": {
-            "assemblyVersion": "1.0.1.0",
-            "fileVersion": "1.0.1.0"
           }
         }
       },
@@ -212,13 +203,6 @@
       "sha512": "sha512-pA581o5JoAAFlintQEeDncIr99WHZOWzwnZWLuPiSW4BmFjG/oYf8F6C60Ob/5w1C1QB0k72NLgh8mEwnTCI5Q==",
       "path": "discord.net.websocket/3.10.0",
       "hashPath": "discord.net.websocket.3.10.0.nupkg.sha512"
-    },
-    "INIParser/1.0.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-gO/vSgpyNel4h6O3sBPS/bRPwd+aOBke4RLImqTtKI+hmSucRGevyN+HRwpAuN8X+gUy+mL48vExWe5dYiaj0A==",
-      "path": "iniparser/1.0.1",
-      "hashPath": "iniparser.1.0.1.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection.Abstractions/5.0.0": {
       "type": "package",

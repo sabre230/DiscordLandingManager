@@ -47,15 +47,19 @@ public  class Program
 
         // Block this task until the program is closed
         // Uncomment to keep the task open after finishing
-        //await Task.Delay(-1);
+        await Task.Delay(-1);
     }
 
     public async Task OnReady()
     {
         // WE ARE READY TO DO STUFF NOW
 
+        Console.WriteLine("Starting bulk delete...");
         await BulkDelete();
+        Console.WriteLine("Bulk delete finished!");
+        Console.WriteLine("Starting PostFromXML...");
         await PostFromXML();
+        Console.WriteLine("PostFromXML done! You should be safe to close the window now.");
     }
 
     public async Task GetConfigFromXML()

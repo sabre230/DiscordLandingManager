@@ -9,7 +9,6 @@ C:\Users\oi17507\source\repos\PostBot\bin\Release\net6.0\Discord.Net.Interaction
 C:\Users\oi17507\source\repos\PostBot\bin\Release\net6.0\Discord.Net.Rest.dll
 C:\Users\oi17507\source\repos\PostBot\bin\Release\net6.0\Discord.Net.Webhook.dll
 C:\Users\oi17507\source\repos\PostBot\bin\Release\net6.0\Discord.Net.WebSocket.dll
-C:\Users\oi17507\source\repos\PostBot\bin\Release\net6.0\INIParser.dll
 C:\Users\oi17507\source\repos\PostBot\bin\Release\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\oi17507\source\repos\PostBot\bin\Release\net6.0\Newtonsoft.Json.dll
 C:\Users\oi17507\source\repos\PostBot\bin\Release\net6.0\System.Interactive.Async.dll
