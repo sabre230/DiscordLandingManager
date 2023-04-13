@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Settings>
-	<!-- Bot Token must be a string with NO whitespace! Get it from Discord developer menu -->
-	<BotToken>MTA5MTM4NjM3MjczNDA3MDgyNA.GewPHM.kmu0DJyfN7i2XVnJ2FgVi8u8mepM5X-wHL6hp4</BotToken>
-	<!-- Guild ID == Server ID, must be ulong-->
-	<GuildID>1080603347427545199</GuildID>
-	<!-- TextChannelID must be ulong -->
-	<TextChannelID>1080606943204356177</TextChannelID>
-</Settings>
