@@ -53,6 +53,8 @@ public  class Program
     public async Task OnReady()
     {
         // WE ARE READY TO DO STUFF NOW
+        Console.WriteLine("Checking for config.xml and announcement.xml...");
+        await CheckForFiles();
 
         Console.WriteLine("Starting bulk delete...");
         await BulkDelete(250);
@@ -60,6 +62,33 @@ public  class Program
         Console.WriteLine("Starting PostFromXML...");
         await PostFromXML();
         Console.WriteLine("PostFromXML done! You should be safe to close the window now.");
+    }
+
+    public async Task CheckForFiles()
+    {
+        bool restartRequired = false;
+
+        if (!File.Exists(@"config.xml"))
+        {
+            Console.WriteLine("No config.xml found! Creating a new one based on the template.");
+            File.Copy(@"config-template.xml", @"config.xml");
+
+            restartRequired = true;
+        }
+
+        if (!File.Exists(@"announcement.xml"))
+        {
+            Console.WriteLine("No announcement.xml found! Creating a new one based on the template.");
+            File.Copy(@"announcement-template.xml", @"announcement.xml");
+
+            restartRequired = true;
+        }
+
+        if (restartRequired)
+        {
+            Console.WriteLine("Further configuration is required.");
+            Console.WriteLine("Please update config.xml and announcment.xml with your chosen information.");
+        }
     }
 
     public async Task GetConfigFromXML()
