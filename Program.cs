@@ -35,6 +35,10 @@ public  class Program
 
     public async Task StartBot()
     {
+        Console.WriteLine("Checking for config.xml and announcement.xml...");
+        CheckForFiles();
+        Console.WriteLine("Done!");
+
         await _client.LoginAsync(TokenType.Bot, token);
         await _client.StartAsync();
 
@@ -53,33 +57,32 @@ public  class Program
     public async Task OnReady()
     {
         // WE ARE READY TO DO STUFF NOW
-        Console.WriteLine("Checking for config.xml and announcement.xml...");
-        await CheckForFiles();
 
         Console.WriteLine("Starting bulk delete...");
         await BulkDelete(250);
         Console.WriteLine("Bulk delete finished!");
+
         Console.WriteLine("Starting PostFromXML...");
         await PostFromXML();
         Console.WriteLine("PostFromXML done! You should be safe to close the window now.");
     }
 
-    public async Task CheckForFiles()
+    public void CheckForFiles()
     {
         bool restartRequired = false;
 
-        if (!File.Exists(@"config.xml"))
+        if (!File.Exists("config.xml"))
         {
             Console.WriteLine("No config.xml found! Creating a new one based on the template.");
-            File.Copy(@"config-template.xml", @"config.xml");
+            File.Copy("config-template.xml", "config.xml");
 
             restartRequired = true;
         }
 
-        if (!File.Exists(@"announcement.xml"))
+        if (!File.Exists("announcement.xml"))
         {
             Console.WriteLine("No announcement.xml found! Creating a new one based on the template.");
-            File.Copy(@"announcement-template.xml", @"announcement.xml");
+            File.Copy("announcement-template.xml", "announcement.xml");
 
             restartRequired = true;
         }
@@ -88,6 +91,10 @@ public  class Program
         {
             Console.WriteLine("Further configuration is required.");
             Console.WriteLine("Please update config.xml and announcment.xml with your chosen information.");
+
+            Console.WriteLine("Press any key to close this window...");
+            Console.ReadKey();
+            Environment.Exit(0);
         }
     }
 
