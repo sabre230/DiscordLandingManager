@@ -24,8 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="announcement-template.xml" />
-    <Resource Include="config-template.xml" />
+    <EmbeddedResource Include="announcement-template.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="config-template.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Resource Include="template.xml" />
     <Resource Include="CommandHandler.cs" />
   </ItemGroup>
