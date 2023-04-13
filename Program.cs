@@ -54,8 +54,10 @@ public  class Program
     {
         // WE ARE READY TO DO STUFF NOW
 
+        CommandHandler ch = new();
+
         Console.WriteLine("Starting bulk delete...");
-        await BulkDelete();
+        await BulkDelete(250);
         Console.WriteLine("Bulk delete finished!");
         Console.WriteLine("Starting PostFromXML...");
         await PostFromXML();
@@ -129,10 +131,10 @@ public  class Program
         }
     }
 
-    public async Task BulkDelete()
+    public async Task BulkDelete(int amount)
     {
         var textChannel = await _client.GetChannelAsync(TextChannel) as ITextChannel;
-        var messages = await textChannel.GetMessagesAsync(250).FlattenAsync();
+        var messages = await textChannel.GetMessagesAsync(amount).FlattenAsync();
         await textChannel.DeleteMessagesAsync(messages);
     }
 

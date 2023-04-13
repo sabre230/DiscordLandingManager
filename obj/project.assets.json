@@ -561,23 +561,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\oi17507\\.nuget\\packages\\": {},
+    "C:\\Users\\sabre\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\oi17507\\source\\repos\\PostBot\\PostBot.csproj",
+      "projectUniqueName": "C:\\Users\\sabre\\source\\repos\\sabre230\\PostBot\\PostBot.csproj",
       "projectName": "PostBot",
-      "projectPath": "C:\\Users\\oi17507\\source\\repos\\PostBot\\PostBot.csproj",
-      "packagesPath": "C:\\Users\\oi17507\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\oi17507\\source\\repos\\PostBot\\obj\\",
+      "projectPath": "C:\\Users\\sabre\\source\\repos\\sabre230\\PostBot\\PostBot.csproj",
+      "packagesPath": "C:\\Users\\sabre\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\sabre\\source\\repos\\sabre230\\PostBot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\oi17507\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\sabre\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -633,7 +633,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

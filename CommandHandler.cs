@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PostBot;
 
-internal class CommandHandler
+public class CommandHandler
 {
     private readonly DiscordSocketClient _client;
     private readonly CommandService _commands;
@@ -48,4 +48,14 @@ internal class CommandHandler
             argPos: argPos,
             services: null);
     }
+}
+
+public class RulesCommand : ModuleBase<SocketCommandContext>
+{
+    [Command("echo")]
+    [Summary("Echoes a message")]
+    public Task async SayAsync(
+        [Remainder] [Summary("The text to echo")]
+        string echo)
+        => ReplyAsync(echo);
 }

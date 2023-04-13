@@ -36,7 +36,6 @@ C:\Users\sabre\Source\Repos\sabre230\PostBot\bin\Debug\net6.0\Discord.Net.Intera
 C:\Users\sabre\Source\Repos\sabre230\PostBot\bin\Debug\net6.0\Discord.Net.Rest.dll
 C:\Users\sabre\Source\Repos\sabre230\PostBot\bin\Debug\net6.0\Discord.Net.Webhook.dll
 C:\Users\sabre\Source\Repos\sabre230\PostBot\bin\Debug\net6.0\Discord.Net.WebSocket.dll
-C:\Users\sabre\Source\Repos\sabre230\PostBot\bin\Debug\net6.0\INIParser.dll
 C:\Users\sabre\Source\Repos\sabre230\PostBot\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 C:\Users\sabre\Source\Repos\sabre230\PostBot\bin\Debug\net6.0\Newtonsoft.Json.dll
 C:\Users\sabre\Source\Repos\sabre230\PostBot\bin\Debug\net6.0\System.Interactive.Async.dll
