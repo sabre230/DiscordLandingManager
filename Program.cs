@@ -9,6 +9,8 @@ using System.Xml.Linq;
 using System;
 using Newtonsoft.Json;
 using System.Windows.Input;
+using PostBot;
+using System.Diagnostics;
 
 //namespace PostBot;
 
@@ -17,6 +19,7 @@ public  class Program
     private DiscordSocketClient _client;
     private CommandService _commandService;
     private CommandHandler _commandHandler;
+    private Commands _mycommands;
 
     public ulong Guild;
     public ulong TextChannel;
@@ -35,7 +38,7 @@ public  class Program
         // Get our settings before doing anything else!
         await GetConfigFromXML();
 
-        // Create a message cache for reasons
+        // Create a message cache for reasons related to logging
         var _config = new DiscordSocketConfig { MessageCacheSize = 100 };
 
         // Create a new client instance (just one)
@@ -44,6 +47,7 @@ public  class Program
         // Create a new command service and command handler
         _commandService = new(); // apparently new() is the new hotness? 
         _commandHandler = new(_client, _commandService);
+        _mycommands = new();
 
         _client.Log += Log;
 
@@ -58,7 +62,6 @@ public  class Program
         // Load our modules/commands
         await _commandHandler.InstallCommandsAsync();
         _client.SlashCommandExecuted += SlashCommandHandler;
-        //_client.InteractionCreated += HandleInteractionAsync;
 
 
         // Listen for when the client is ready
@@ -69,8 +72,6 @@ public  class Program
             return Task.CompletedTask;
         };
 
-        //_client.MessageReceived += _commandHandler.HandleCommandAsync;
-
         // Block this task until the program is closed
         // Uncomment to keep the task open after finishing
         await Task.Delay(-1);
@@ -79,25 +80,12 @@ public  class Program
     public async Task OnReady()
     {
         // WE ARE READY TO DO STUFF NOW
-
-        // Once the bot is beefier, we will delegate these to mod commands
-        //Console.WriteLine("Starting bulk delete...");
-        //await BulkDelete(250);
-        //Console.WriteLine("Bulk delete finished!");
-
-        Console.WriteLine("Starting PostFromXML...");
-        await PostFromXML();
-        Console.WriteLine("PostFromXML done! You should be safe to close the window now.");
-
         await SlashCommands();
     }
 
     private async Task SlashCommands()
     {
-        // Set up slash commands
-        var serverCommand = new SlashCommandBuilder()
-        .WithName("echo-server")
-        .WithDescription("echoes a message");
+        Console.WriteLine($"SlashCommands() called");
 
         // Echo command (global)
         var echoCommand = new SlashCommandBuilder()
@@ -105,24 +93,30 @@ public  class Program
         .WithDescription("Echoes a message")
         .AddOption("string", ApplicationCommandOptionType.String, "The string you want to echo.", isRequired: true);
 
-
         // Rules command (global)
-        var rulesCommand = new SlashCommandBuilder();
-        rulesCommand.WithName("rules");
-        rulesCommand.WithDescription("Quotes an abridges version of th rules");
+        var rulesCommand = new SlashCommandBuilder()
+        .WithName("rules")
+        .WithDescription("Quotes an abridged version of the rules");
+
+        // Purge command (global)
+        var purgeCommand = new SlashCommandBuilder()
+        .WithName("purge")
+        .WithDescription("Purge X number of messages")
+        .AddOption("amount", ApplicationCommandOptionType.Integer, "The amount of messages to remove.", isRequired: true);
 
         try
         {
             // With global commands we don't need the guild.
             await _client.CreateGlobalApplicationCommandAsync(echoCommand.Build());
             await _client.CreateGlobalApplicationCommandAsync(rulesCommand.Build());
+            await _client.CreateGlobalApplicationCommandAsync(purgeCommand.Build());
             // Using the ready event is a simple implementation for the sake of the example. Suitable for testing and development.
             // For a production bot, it is recommended to only run the CreateGlobalApplicationCommandAsync() once for each command.
         }
         catch (ApplicationCommandException exception)
         {
             // If our command was invalid, we should catch an ApplicationCommandException. This exception contains the path of the error as well as the error message. You can serialize the Error field in the exception to get a visual of where your error is.
-            var json = JsonConvert.SerializeObject(exception.Reason, Formatting.Indented);
+            var json = JsonConvert.SerializeObject(exception.Source, Formatting.Indented);
 
             // You can send this error somewhere or just print it to the console, for this example we're just going to print it.
             Console.WriteLine(json);
@@ -131,23 +125,42 @@ public  class Program
 
     private async Task SlashCommandHandler(SocketSlashCommand command)
     {
+        Console.WriteLine($"Running '/{command.Data.Name}' command");
+
         // Checking against the given command
-        switch (command.ToString())
+        switch (command.Data.Name)
         {
             case "echo":
-                // Execute somecommand
+                // Just echo some text, use the first options value to get our string text
+                var echoMessage = (string)command.Data.Options.First().Value;
+                await _mycommands.Echo(_client, Guild, TextChannel, echoMessage);
                 break;
 
             case "rules":
-                // Execute someothercommand
+                // Delete all the stuff
+                Console.WriteLine("Starting BulkdDelete()...");
+                await _mycommands.BulkDelete(_client, Guild, TextChannel, 250);
+                Console.WriteLine("BulkDelete() finished!");
+
+                // Then poop out the rules
+                Console.WriteLine("Starting PostFromXML()...");
+                await PostFromXML();
+                Console.WriteLine("PostFromXML() done!");
                 break;
-            
+
+            case "purge":
+                // Delete all the stuff
+                var purgeAmount = (long)command.Data.Options.First().Value;
+                Console.WriteLine("Starting BulkdDelete()...");
+                await _mycommands.BulkDelete(_client, Guild, TextChannel, (int)purgeAmount);
+                Console.WriteLine("BulkDelete() finished!");
+                break;
+
             default:
-                Console.WriteLine($"{command} is an invalid command");
+                Console.WriteLine($"'{command.Data.Name}' is an invalid command");
                 break;
         }
-
-        await command.RespondAsync($"So this happened: {command.Data.Name}");
+        command.DeferAsync(true);
     }
 
     public void CheckForFiles()
@@ -232,7 +245,7 @@ public  class Program
                 if (message.Text != "")
                 {
                     Console.WriteLine($"Message Text: {message.Text}");
-                    await SendText(message.Text);
+                    await _mycommands.SendMessage(_client, Guild, TextChannel, message.Text);
                 }
                 
                 if (message.File != "" && File.Exists(message.File))
@@ -253,14 +266,6 @@ public  class Program
         var textChannel = await _client.GetChannelAsync(TextChannel) as ITextChannel;
         var messages = await textChannel.GetMessagesAsync(amount).FlattenAsync();
         await textChannel.DeleteMessagesAsync(messages);
-    }
-
-    public async Task SendText(string message)
-    {
-        if (message != "")
-        {
-            await _client.GetGuild(Guild).GetTextChannel(TextChannel).SendMessageAsync(message);
-        }
     }
 
     public async Task SendFile(string filePath)
@@ -306,7 +311,7 @@ public class CommandHandler
     public async Task InstallCommandsAsync()
     {
         // Hook the MessageReceived event into our command handler
-        _client.MessageReceived += HandleCommandAsync;
+        //_client.MessageReceived += HandleCommandAsync;
 
         // Here we discover all of the command modules in the entry 
         // assembly and load them. Starting from Discord.NET 2.0, a
@@ -316,8 +321,7 @@ public class CommandHandler
         //
         // If you do not use Dependency Injection, pass null.
         // See Dependency Injection guide for more information.
-        await _commands.AddModulesAsync(assembly: Assembly.GetEntryAssembly(),
-                                        services: null);
+        //await _commands.AddModulesAsync(assembly: Assembly.GetEntryAssembly(), services: null);
     }
 
     private async Task HandleCommandAsync(SocketMessage messageParam)
@@ -348,10 +352,10 @@ public class CommandHandler
 }
 
 // Create a module with no prefix
-public class MyModule : ModuleBase<SocketCommandContext>
+public class CommandSomeCommand : ModuleBase<SocketCommandContext>
 {
-    [SlashCommand("hello", "Says hello to the user.")]
-    public async Task HelloAsync()
+    [SlashCommand("somecommand", "This is somecommand.")]
+    public async Task SomeAsync()
     {
         await ReplyAsync("Hello, world!");
     }
