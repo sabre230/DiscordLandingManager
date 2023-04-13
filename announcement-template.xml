@@ -3,7 +3,9 @@
 		 <!--
 		For each message you want to send as part of an
 		announcement, make a new <Message/> block and make sure 
-		it has a block for <Text/> and <File/> inside
+		it has a block for <Text/> and <File/> inside.
+		DLM doesn't handle Text and Files very well in the same
+		message, so make a new Message block for each one.
 		-->
 	<Message>
 		<Text>
