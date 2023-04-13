@@ -81,9 +81,9 @@ public  class Program
         // WE ARE READY TO DO STUFF NOW
 
         // Once the bot is beefier, we will delegate these to mod commands
-        Console.WriteLine("Starting bulk delete...");
-        await BulkDelete(250);
-        Console.WriteLine("Bulk delete finished!");
+        //Console.WriteLine("Starting bulk delete...");
+        //await BulkDelete(250);
+        //Console.WriteLine("Bulk delete finished!");
 
         Console.WriteLine("Starting PostFromXML...");
         await PostFromXML();
@@ -95,19 +95,27 @@ public  class Program
     private async Task SlashCommands()
     {
         // Set up slash commands
-        var serverCommand = new SlashCommandBuilder();
-        serverCommand.WithName("echo-server");
-        serverCommand.WithDescription("echoes a message");
+        var serverCommand = new SlashCommandBuilder()
+        .WithName("echo-server")
+        .WithDescription("echoes a message");
 
-        // Let's do our global command
-        var globalCommand = new SlashCommandBuilder();
-        globalCommand.WithName("echo");
-        globalCommand.WithDescription("Echoes a message");
+        // Echo command (global)
+        var echoCommand = new SlashCommandBuilder()
+        .WithName("echo")
+        .WithDescription("Echoes a message")
+        .AddOption("string", ApplicationCommandOptionType.String, "The string you want to echo.", isRequired: true);
+
+
+        // Rules command (global)
+        var rulesCommand = new SlashCommandBuilder();
+        rulesCommand.WithName("rules");
+        rulesCommand.WithDescription("Quotes an abridges version of th rules");
 
         try
         {
             // With global commands we don't need the guild.
-            await _client.CreateGlobalApplicationCommandAsync(globalCommand.Build());
+            await _client.CreateGlobalApplicationCommandAsync(echoCommand.Build());
+            await _client.CreateGlobalApplicationCommandAsync(rulesCommand.Build());
             // Using the ready event is a simple implementation for the sake of the example. Suitable for testing and development.
             // For a production bot, it is recommended to only run the CreateGlobalApplicationCommandAsync() once for each command.
         }
@@ -123,6 +131,22 @@ public  class Program
 
     private async Task SlashCommandHandler(SocketSlashCommand command)
     {
+        // Checking against the given command
+        switch (command.ToString())
+        {
+            case "echo":
+                // Execute somecommand
+                break;
+
+            case "rules":
+                // Execute someothercommand
+                break;
+            
+            default:
+                Console.WriteLine($"{command} is an invalid command");
+                break;
+        }
+
         await command.RespondAsync($"So this happened: {command.Data.Name}");
     }
 
