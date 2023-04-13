@@ -10,52 +10,52 @@ using System.Threading.Tasks;
 
 namespace PostBot;
 
-public class CommandHandler
-{
-    private readonly DiscordSocketClient _client;
-    private readonly CommandService _commands;
+//public class CommandHandler
+//{
+//    private readonly DiscordSocketClient _client;
+//    private readonly CommandService _commands;
 
-    public CommandHandler(DiscordSocketClient client, CommandService commands)
-    {
-        _client = client;
-        _commands = commands;
-    }
+//    public CommandHandler(DiscordSocketClient client, CommandService commands)
+//    {
+//        _client = client;
+//        _commands = commands;
+//    }
 
-    public async Task InstallCommandsAsync()
-    {
-        _client.MessageReceived += HandleCommandAsync;
+//    public async Task InstallCommandsAsync()
+//    {
+//        _client.MessageReceived += HandleCommandAsync;
 
-        await _commands.AddModulesAsync(assembly: Assembly.GetEntryAssembly(), services: null);
-    }
+//        await _commands.AddModulesAsync(assembly: Assembly.GetEntryAssembly(), services: null);
+//    }
 
-    private async Task HandleCommandAsync(SocketMessage messageParam)
-    {
-        var message = messageParam as SocketUserMessage;
+//    private async Task HandleCommandAsync(SocketMessage messageParam)
+//    {
+//        var message = messageParam as SocketUserMessage;
 
-        if (message == null) return;
+//        if (message == null) return;
 
-        int argPos = 0;
+//        int argPos = 0;
 
-        if (!(message.HasCharPrefix('!', ref argPos) ||
-                    message.HasMentionPrefix(_client.CurrentUser, ref argPos)) ||
-                    message.Author.IsBot)
-            return;
+//        if (!(message.HasCharPrefix('!', ref argPos) ||
+//                    message.HasMentionPrefix(_client.CurrentUser, ref argPos)) ||
+//                    message.Author.IsBot)
+//            return;
 
-        var context = new SocketCommandContext(_client, message);
+//        var context = new SocketCommandContext(_client, message);
 
-        await _commands.ExecuteAsync(
-            context: context,
-            argPos: argPos,
-            services: null);
-    }
-}
+//        await _commands.ExecuteAsync(
+//            context: context,
+//            argPos: argPos,
+//            services: null);
+//    }
+//}
 
-public class RulesCommand : ModuleBase<SocketCommandContext>
-{
-    [Command("echo")]
-    [Summary("Echoes a message")]
-    public Task async SayAsync(
-        [Remainder] [Summary("The text to echo")]
-        string echo)
-        => ReplyAsync(echo);
-}
+//public class RulesCommand : ModuleBase<SocketCommandContext>
+//{
+//    [Command("echo")]
+//    [Summary("Echoes a message")]
+//    public Task async SayAsync(
+//        [Remainder] [Summary("The text to echo")]
+//        string echo)
+//        => ReplyAsync(echo);
+//}
