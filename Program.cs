@@ -54,8 +54,6 @@ public  class Program
     {
         // WE ARE READY TO DO STUFF NOW
 
-        CommandHandler ch = new();
-
         Console.WriteLine("Starting bulk delete...");
         await BulkDelete(250);
         Console.WriteLine("Bulk delete finished!");
