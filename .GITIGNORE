@@ -3,6 +3,10 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Test files to exclude
+config.xml
+announcement.xml
+
 # User-specific files
 *.rsuser
 *.suo
