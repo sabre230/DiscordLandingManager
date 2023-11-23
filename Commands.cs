@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Discord.Audio.Streams;
 using Discord.Commands;
 using Discord.Rest;
 using Discord.WebSocket;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +33,12 @@ public class Commands
         }
         return;
     }
+
+    // public static Embed SendEmbedMessage(DiscordSocketClient client, ulong guild, ulong textChannel, string message, string color)
+    // {
+
+        
+    // }
 
     public async Task BulkDelete(DiscordSocketClient client, ulong guild, ulong textChannel, int amount)
     {

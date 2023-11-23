@@ -16,14 +16,14 @@ using System.Diagnostics;
 
 public  class Program
 {
-    private DiscordSocketClient _client;
-    private CommandService _commandService;
-    private CommandHandler _commandHandler;
-    private Commands _mycommands;
+    private DiscordSocketClient _client = new();
+    private CommandService _commandService = new();
+    private CommandHandler? _commandHandler;
+    private Commands _mycommands = new();
 
     public ulong Guild;
     public ulong TextChannel;
-    private string token;
+    private string token = "";
 
     public static Task Main(string[] args) => new Program().MainAsync();
 
@@ -96,13 +96,22 @@ public  class Program
         // Rules command (global)
         var rulesCommand = new SlashCommandBuilder()
         .WithName("rules")
-        .WithDescription("Quotes an abridged version of the rules");
+        .WithDescription("Spits out the rules in the specified channel");
 
         // Purge command (global)
         var purgeCommand = new SlashCommandBuilder()
         .WithName("purge")
-        .WithDescription("Purge X number of messages")
+        .WithDescription("Purge N number of messages")
         .AddOption("amount", ApplicationCommandOptionType.Integer, "The amount of messages to remove.", isRequired: true);
+
+        var embedCommand = new SlashCommandBuilder()
+        .WithName("embed")
+        .WithDescription("Send an embed message")
+        .AddOption("title", ApplicationCommandOptionType.String, "(Required) The title of the embed", isRequired: true)
+        .AddOption("description", ApplicationCommandOptionType.String, "(Required) The message you want to embed", isRequired: true)
+        .AddOption("color", ApplicationCommandOptionType.String, "(Optional) The color of the embed in #RRGGBB format")
+        .AddOption("thumbnail", ApplicationCommandOptionType.Attachment, "(Optional) The thumbnail URL for the embed")
+        .AddOption("image", ApplicationCommandOptionType.Attachment, "(Optional) Image URL to be used");
 
         try
         {
@@ -110,6 +119,7 @@ public  class Program
             await _client.CreateGlobalApplicationCommandAsync(echoCommand.Build());
             await _client.CreateGlobalApplicationCommandAsync(rulesCommand.Build());
             await _client.CreateGlobalApplicationCommandAsync(purgeCommand.Build());
+            await _client.CreateGlobalApplicationCommandAsync(embedCommand.Build());
             // Using the ready event is a simple implementation for the sake of the example. Suitable for testing and development.
             // For a production bot, it is recommended to only run the CreateGlobalApplicationCommandAsync() once for each command.
         }
@@ -221,7 +231,7 @@ public  class Program
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine(e.InnerException);
         }
     }
 
@@ -257,7 +267,7 @@ public  class Program
         }
         catch(Exception e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine(e.InnerException);
         }
     }
 
