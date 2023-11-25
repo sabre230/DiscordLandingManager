@@ -2,17 +2,10 @@
 using Discord.Interactions;
 using Discord.Net;
 using Discord.WebSocket;
-using System.Reflection;
 using Discord.Commands;
-using Discord.Utils;
 using System.Xml.Linq;
-using System;
 using Newtonsoft.Json;
-using System.Windows.Input;
 using PostBot;
-using System.Diagnostics;
-
-//namespace PostBot;
 
 public  class Program
 {
@@ -28,7 +21,6 @@ public  class Program
     public static Task Main(string[] args) => new Program().MainAsync();
 
     public async Task MainAsync()
-
     {
         // Ensure our config files are in place
         Console.WriteLine("Checking for config.xml and announcement.xml...");
@@ -166,6 +158,9 @@ public  class Program
                 Console.WriteLine("BulkDelete() finished!");
                 break;
 
+            case "embed":
+                // let's send an embed message
+
             default:
                 Console.WriteLine($"'{command.Data.Name}' is an invalid command");
                 break;
@@ -237,14 +232,28 @@ public  class Program
 
     public async Task PostFromXML()
     {
+        // Checking if the announcement xml exists, ends the method if not
         if (!File.Exists(Path.Combine("announcement.xml")))
         {
             Console.WriteLine($"announcement.xml not found.");
             return;
         }
 
+
         XDocument xmlAnnouncementFile = XDocument.Load("announcement.xml");
-        List<MessagesFromXML> messages = xmlAnnouncementFile.Root.Elements("Message").Select(x => new MessagesFromXML { Text = x.Element("Text").Value, File = x.Element("File").Value }).ToList();
+        List<MessagesFromXML> messages = xmlAnnouncementFile.Root.Elements("Message")
+        .Select(x => new MessagesFromXML 
+            { 
+                Text = x.Element("Text").Value, 
+                File = x.Element("File").Value,
+                //IsEmbed = get message attribute for embed check
+                EmbedTitle = x.Element("EmbTitle").Value,
+                EmbedDescription = x.Element("EmbDescription").Value,
+                EmbedColor = x.Element("EmbColor").Value,
+                EmbedThumbnailURL = x.Element("EmbThumbnailURL").Value,
+                EmbedImageURL = x.Element("EmbImageURL").Value
+            })
+            .ToList();
 
         try
         {
@@ -295,8 +304,18 @@ public  class Program
 
 public class MessagesFromXML
 {
-    public string File { get; set; }
-    public string Text { get; set; }
+    // Standard message
+    public string? File { get; set; }
+    public string? Text { get; set; }
+
+    // Embed-exclusive
+    public bool? IsEmbed { get; set; }
+    public string? EmbedTitle { get; set; }
+    public string? EmbedDescription { get; set; }
+    public string? EmbedColor { get; set; }
+    public string? EmbedThumbnailURL { get; set; }
+    public string? EmbedImageURL { get; set; }
+
 }
 
 public class ConfigFromXML

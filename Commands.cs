@@ -34,11 +34,31 @@ public class Commands
         return;
     }
 
-    // public static Embed SendEmbedMessage(DiscordSocketClient client, ulong guild, ulong textChannel, string message, string color)
-    // {
-
+    [Command("embed")]
+    //public static Embed SendEmbedMessage(DiscordSocketClient client, ulong guild, ulong textChannel, string embMessage, string embColor)
+    public async Task SendEmbed()
+    {
+        // Create the new embed object, replace "" with some bullshit
+        var embed = new EmbedBuilder
+        {
+            Title = "",
+            Description = "",
+            ThumbnailUrl = "",
+            ImageUrl = ""
+        };
         
-    // }
+        // Fields created here will overwrite previously creaded fields
+        embed.AddField("Field Name", "Field Value")
+        .WithAuthor("Author Name")
+        .WithTitle("Over-ride Title")
+        .WithDescription("Description Text")
+        .WithColor(Color.Red)
+        .WithUrl("SomeURL.com")
+        .WithFooter(footer => footer.Text = "Footer Text")
+        .WithCurrentTimestamp();
+
+        embed.Build();
+    }
 
     public async Task BulkDelete(DiscordSocketClient client, ulong guild, ulong textChannel, int amount)
     {

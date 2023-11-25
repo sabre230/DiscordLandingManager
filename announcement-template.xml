@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<xs:attribute name="IsEmbed" type="xs:boolean"/>
+
 <Messages>
 		 <!--
 		For each message you want to send as part of an
@@ -7,7 +9,7 @@
 		DLM doesn't handle Text and Files very well in the same
 		message, so make a new Message block for each one.
 		-->
-	<Message>
+	<Message IsEmbed="false">
 		<Text>
 			<!-- Place the text you want to send here -->
 		</Text>
