@@ -140,7 +140,7 @@ public  class Program
 
             case "rules":
                 // Delete all the stuff
-                Console.WriteLine("Starting BulkdDelete()...");
+                Console.WriteLine("Starting BulkDelete()...");
                 await _mycommands.BulkDelete(_client, Guild, TextChannel, 250);
                 Console.WriteLine("BulkDelete() finished!");
 
@@ -172,6 +172,7 @@ public  class Program
     {
         bool restartRequired = false;
 
+        // Check for config file
         if (!File.Exists("config.xml"))
         {
             Console.WriteLine("No config.xml found! Creating a new one based on the template.");
@@ -180,6 +181,7 @@ public  class Program
             restartRequired = true;
         }
 
+        // Check for announcement file
         if (!File.Exists("announcement.xml"))
         {
             Console.WriteLine("No announcement.xml found! Creating a new one based on the template.");
@@ -188,6 +190,7 @@ public  class Program
             restartRequired = true;
         }
 
+        // Inform the user of a required restart and kill the application
         if (restartRequired)
         {
             Console.WriteLine("Further configuration is required.");
@@ -201,12 +204,13 @@ public  class Program
 
     public async Task GetConfigFromXML()
     {
+        // Check for congif file before trying to load it
         if (!File.Exists(Path.Combine("config.xml")))
         {
             Console.WriteLine($"File not found at: {Path.Combine("config.xml")}");
             return;
         }
-
+        // Load the config file
         XDocument xmlConfigFile = XDocument.Load("config.xml");
 
         try
@@ -219,7 +223,7 @@ public  class Program
             // Use the values as needed
             if (token!= null || token != "")
             {
-                Console.WriteLine($"Bot Token: -->{token}<--");
+                Console.WriteLine($"Bot Token: -->{token}<--"); // Arrows to make sure there's no whitespace in the token
             }
             Console.WriteLine($"Guild ID: {Guild}");
             Console.WriteLine($"Text Channel ID: {TextChannel}");

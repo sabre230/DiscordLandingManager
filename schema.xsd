@@ -1,0 +1,23 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Messages">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Message" maxOccurs="unbounded" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Text" minOccurs="0"/>
+              <xs:element type="xs:string" name="File" minOccurs="0"/>
+              <xs:element type="xs:string" name="EmbTitle" minOccurs="0"/>
+              <xs:element type="xs:string" name="EmbDescription" minOccurs="0"/>
+              <xs:element type="xs:string" name="EmbColor" minOccurs="0"/>
+              <xs:element type="xs:string" name="EmbFooter" minOccurs="0"/>
+              <xs:element type="xs:string" name="EmbThumbnailURL" minOccurs="0"/>
+              <xs:element type="xs:string" name="EmbImageURL" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="IsEmbed" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
